@@ -1,0 +1,47 @@
+.stringContent {
+  display: flex;
+  width: 200px;
+  justify-content: space-between;
+}
+
+.stringContent:nth-child(odd) {
+  background-color: #dbe3e6;
+}
+
+.forward {
+  margin-top: 50px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+.backward {
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+.content {
+  margin-top: 80px;
+}
+
+.app {
+  display: flex;
+  justify-content: space-around;
+}
+
+.itemAns,
+.itemPass {
+  display: inline-block;
+  width: 20px;
+}
+
+.itemAns.empty {
+  color: red;
+}
+
+.ans,
+#pass {
+  height: 300px;
+}
+.itemPass.passed {
+  background-color: green;
+}

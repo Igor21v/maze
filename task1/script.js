@@ -1,4 +1,4 @@
-let needStop = false;
+let isStartTunnel = true;
 const pass = Array.from(Array(16), () => Array(16).fill(0));
 const ans = Array.from(Array(16), () => Array(16).fill(88));
 let startTime;
@@ -43,16 +43,15 @@ function selectRoute(resp, posX, posY) {
   if (canBack) {
     possibleRoutes.push({ rout: "back", pass: backPass });
   }
-  if (canRight) {
-    possibleRoutes.push({ rout: "right", pass: rightPass });
+  if (canLeft) {
+    possibleRoutes.push({ rout: "left", pass: leftPass });
   }
   if (canForward) {
     possibleRoutes.push({ rout: "forward", pass: forwardPass });
   }
-  if (canLeft) {
-    possibleRoutes.push({ rout: "left", pass: leftPass });
+  if (canRight) {
+    possibleRoutes.push({ rout: "right", pass: rightPass });
   }
-
   let go = "back";
   let min = Infinity;
   possibleRoutes.forEach((item) => {
