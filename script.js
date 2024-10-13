@@ -2,8 +2,8 @@ let needStop = false;
 const pass = Array.from(Array(16), () => Array(16).fill(0));
 const ans = Array.from(Array(16), () => Array(16).fill(88));
 let startTime;
-// Помечаем первый туннель чтобы в него не возвращаться
-let firstTunnel = true;
+// Флаг движения из тупика
+let deadEnd = true;
 
 async function main() {
   if (!needStop) {
@@ -57,18 +57,26 @@ function selectRoute(resp, posX, posY) {
 
   let go = "back";
   let min = Infinity;
+  // Количество маршрутов на которвые еще можно уйти
+  let openRouts = 0;
   possibleRoutes.forEach((item) => {
     if (item.pass < min) {
       min = item.pass;
       go = item.rout;
     }
+    if (item.pass < 6) {
+      openRouts++;
+    }
   });
   // Больше не пройденных маршрутов нет
-  if (min > 5) {
+  if (openRouts === 0) {
     go = "stop";
   }
-  if (min > 1) {
-    firstTunnel = false;
+
+  if (openRouts > 1) {
+    deadEnd = false;
+  } else {
+    deadEnd = true;
   }
   const routs = possibleRoutes.length;
   markPass({ go, routs, posX, posY });
@@ -76,13 +84,13 @@ function selectRoute(resp, posX, posY) {
   return go;
 }
 
-function markPass({ go, routs, posX, posY }) {
-  if (routs === 4) {
+function markPass({ routs, posX, posY }) {
+  if (deadEnd) {
+    pass[posX][posY] = 6;
+  } else if (routs === 4) {
     pass[posX][posY] += 1.5;
   } else if (routs === 3) {
     pass[posX][posY] += 2;
-  } else if (go === "back" || firstTunnel) {
-    pass[posX][posY] += 6;
   } else {
     pass[posX][posY] += 3;
   }
@@ -224,6 +232,5 @@ async function sendAns() {
     }
   );
   let resp = await response.json();
-  console.log(resp);
   showScore(resp);
 }
