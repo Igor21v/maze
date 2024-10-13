@@ -2,6 +2,8 @@ let needStop = false;
 const pass = Array.from(Array(16), () => Array(16).fill(0));
 const ans = Array.from(Array(16), () => Array(16).fill(88));
 let startTime;
+// Помечаем первый туннель чтобы в него не возвращаться
+let firstTunnel = true;
 
 async function main() {
   if (!needStop) {
@@ -65,6 +67,9 @@ function selectRoute(resp, posX, posY) {
   if (min > 5) {
     go = "stop";
   }
+  if (min > 1) {
+    firstTunnel = false;
+  }
   const routs = possibleRoutes.length;
   markPass({ go, routs, posX, posY });
 
@@ -76,7 +81,7 @@ function markPass({ go, routs, posX, posY }) {
     pass[posX][posY] += 1.5;
   } else if (routs === 3) {
     pass[posX][posY] += 2;
-  } else if (go === "back") {
+  } else if (go === "back" || firstTunnel) {
     pass[posX][posY] += 6;
   } else {
     pass[posX][posY] += 3;
