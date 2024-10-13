@@ -45,11 +45,3 @@
 .itemPass.passed {
   background-color: green;
 }
-
-#finished {
-  opacity: 0;
-}
-
-#finished.show {
-  opacity: 1;
-}

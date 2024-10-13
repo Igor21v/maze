@@ -2,7 +2,6 @@ let isStartTunnel = true;
 const pass = Array.from(Array(16), () => Array(16).fill(0));
 const ans = Array.from(Array(16), () => Array(16).fill(88));
 let startTime;
-let finished = false;
 
 async function main() {
   if (!needStop) {
@@ -24,11 +23,11 @@ async function main() {
     } else if (go === "right") {
       right();
     } else {
-      finished = true;
+      sendAns();
     }
+    showTime(startTime);
     showAns(ans);
     showPass(pass);
-    showTime(startTime, finished);
   }
 }
 
@@ -205,4 +204,20 @@ function start() {
 // Резерв
 function getStrCords(posX, posY) {
   return ("0" + posX).slice(-2) + ("0" + posY).slice(-2);
+}
+
+async function sendAns() {
+  let response = await fetch(
+    "http://127.0.0.1:8801/api/v1/matrix/send?token=df314662-ea9b-4f05-867b-9e7d7e7a382666eab0dc-e1ff-4172-9901-5568e7cda90a",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(ans),
+    }
+  );
+  let resp = await response.json();
+  console.log(resp);
+  showScore(resp);
 }

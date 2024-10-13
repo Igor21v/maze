@@ -52,14 +52,15 @@ const showPass = (pass) => {
   });
 };
 
-const showTime = (time, finished) => {
+const showTime = (startTime) => {
   const timeEl = document.getElementById("time");
-  const diff = Math.ceil((Date.now() - time) / 1000);
+  const diff = Math.ceil((Date.now() - startTime) / 1000);
   const sec = diff % 60;
   const min = Math.floor(diff / 60);
   timeEl.innerHTML = min + " : " + sec;
-  if (finished) {
-    const finishedEl = document.getElementById("finished");
-    finishedEl.classList.add("show");
-  }
+};
+
+const showScore = (resp) => {
+  const finishedEl = document.getElementById("finished");
+  finishedEl.innerHTML = "Лабиринт пройден, счет: " + resp?.Score;
 };
