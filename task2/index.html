@@ -5,7 +5,6 @@
     <title>Управление роботом</title>
     <script src="./script.js"></script>
     <script src="./show.js"></script>
-    <script src="./calcAns.js"></script>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -14,7 +13,7 @@
         <h1>Управление роботом</h1>
         <button onclick="start()">Старт</button>
         <button onclick="stop()">Стоп</button>
-        <button onclick="sendAns()">Отправить ответ</button>
+        <button onclick="restart()">Рестарт</button>
         <div class="forward">
           <button onclick="forward()">Вперед</button>
         </div>
@@ -28,8 +27,6 @@
         <div id="content" class="content"></div>
       </div>
       <div>
-        <h1>Ответ</h1>
-        <div id="ans" class="ans"></div>
         <h1>Пройденные маршруты</h1>
         <div id="pass" class="pass"></div>
         <h1>Время</h1>

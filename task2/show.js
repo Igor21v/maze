@@ -16,24 +16,6 @@ const showResp = (resp) => {
   });
 };
 
-const showAns = (ans) => {
-  const ansEl = document.getElementById("ans");
-  ansEl.replaceChildren();
-  ans.forEach((row) => {
-    const rowEl = document.createElement("div");
-    row.forEach((item) => {
-      const itemEl = document.createElement("span");
-      itemEl.innerHTML = item;
-      itemEl.className = "itemAns";
-      if (item === 88) {
-        itemEl.classList.add("empty");
-      }
-      rowEl.append(itemEl);
-    });
-    ansEl.append(rowEl);
-  });
-};
-
 const showPass = (pass) => {
   const passEl = document.getElementById("pass");
   passEl.replaceChildren();

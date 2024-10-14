@@ -45,14 +45,14 @@ function selectRoute(resp, posX, posY) {
   if (canBack) {
     possibleRoutes.push({ rout: "back", pass: backPass });
   }
-  if (canRight) {
-    possibleRoutes.push({ rout: "right", pass: rightPass });
+  if (canLeft) {
+    possibleRoutes.push({ rout: "left", pass: leftPass });
   }
   if (canForward) {
     possibleRoutes.push({ rout: "forward", pass: forwardPass });
   }
-  if (canLeft) {
-    possibleRoutes.push({ rout: "left", pass: leftPass });
+  if (canRight) {
+    possibleRoutes.push({ rout: "right", pass: rightPass });
   }
 
   let go = "back";
